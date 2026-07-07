@@ -1,28 +1,23 @@
-// GST Return Types
-const GST_RETURN_TYPES = {
-  GSTR1_MONTHLY: {
-    name: "GSTR-1 (Monthly)",
-    dueDay: 11,
-    frequency: "MONTHLY"
-  },
-
-  GSTR1_QUARTERLY: {
-    name: "GSTR-1 (Quarterly)",
-    dueDay: 13,
-    frequency: "QUARTERLY"
+const GST_DUE_DATES = {
+  GSTR1: {
+    MONTHLY: 11,
+    QUARTERLY: {
+      Q1: "2026-07-13",
+      Q2: "2026-10-13",
+      Q3: "2027-01-13",
+      Q4: "2027-04-13"
+    }
   },
 
   GSTR3B: {
-    name: "GSTR-3B",
-    dueDay: 20,
-    frequency: "MONTHLY"
+    MONTHLY: 20,
+    QUARTERLY: {
+      Q1: "2026-07-22",
+      Q2: "2026-10-22",
+      Q3: "2027-01-22",
+      Q4: "2027-04-22"
+    }
   }
 };
 
-// Reminder days before due date
-const REMINDER_SCHEDULE_DAYS = [7, 3, 1];
-
-module.exports = {
-  GST_RETURN_TYPES,
-  REMINDER_SCHEDULE_DAYS
-};
+module.exports = GST_DUE_DATES;

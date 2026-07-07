@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  uid               Int                @id @default(autoincrement())
+  uname             String?            @db.Char(20)
+  email             String?            @db.VarChar(30)
+  password          String?            @db.VarChar(13)
+  phone             String?            @db.Char(10)
+  role              String?            @db.Char(20)
+  createdat         DateTime?          @db.Timestamp(6)
+  updatedat         DateTime?          @db.Timestamp(6)
+  gstFilingProfiles GSTFilingProfile[]
+}
+
+model business {
+  bid        Int       @id @default(autoincrement())
+  uid        Int?
+  bname      String?   @db.Char(30)
+  gstin      String?   @db.VarChar(15)
+  ownername  String?   @db.Char(20)
+  owstate    String?   @db.Char(20)
+  owaddress  String?   @db.VarChar(30)
+  bemail     String?   @db.VarChar(20)
+  bpassword  String?   @db.VarChar(13)
+  bcreatedat DateTime? @db.Timestamp(6)
+}
+
+model GSTFilingProfile {
+  id              Int              @id @default(autoincrement())
+  userId          Int
+  gstin           String           @unique
+  businessName    String
+  filingFrequency String
+  reminderDays    Int              @default(3)
+  isActive        Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  user            users            @relation(fields: [userId], references: [uid], onDelete: Cascade)
+  reminderLogs    GSTReminderLog[]
+}
+
+model GSTReminderLog {
+  id           Int              @id @default(autoincrement())
+  gstProfileId Int
+  dueDate      DateTime
+  reminderDate DateTime
+  status       String
+  message      String?
+  sentAt       DateTime?
+  createdAt    DateTime         @default(now())
+  gstProfile   GSTFilingProfile @relation(fields: [gstProfileId], references: [id], onDelete: Cascade)
+}

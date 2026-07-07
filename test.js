@@ -1,7 +1,11 @@
 const {
-  GST_RETURN_TYPES,
-  REMINDER_SCHEDULE_DAYS
-} = require("./src/lib/gst-due-dates");
+    getUpcomingDueDates
+} = require("./src/lib/due-date_engine");
 
-console.log(GST_RETURN_TYPES);
-console.log(REMINDER_SCHEDULE_DAYS);
+console.log("Monthly Filing");
+console.log(getUpcomingDueDates("Monthly"));
+
+console.log();
+
+console.log("Quarterly Filing");
+console.log(getUpcomingDueDates("Quarterly"));
