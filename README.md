@@ -169,4 +169,4 @@ Use the provided Postman Collection to test all APIs.
 
 ## Author
 
-Your Name
+Omi Chaudhari
